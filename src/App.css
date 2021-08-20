@@ -269,6 +269,60 @@ input:-webkit-autofill:active {
   color: #334756;
 }
 
+/* User profile */
+.user-profile {
+  background-color: #e2e2e2;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 300px;
+}
+
+.profile-data {
+  display: flex;
+}
+
+.profile-label {
+  background-color: #ff4c29;
+  color: #e2e2e2;
+  padding: 0.5rem;
+  border-radius: 3px;
+  margin-right: 0.5rem;
+  min-width: 4rem;
+}
+
+.profile-desc {
+  background-color: #334756;
+  color: #ff4c29;
+  padding: 0.5rem;
+  border-radius: 3px;
+}
+
+/* Avatar in profiles */
+.avatar-frame {
+  margin-top: 1rem;
+  background-color: #e2e2e2;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  justify-content: center;
+  border: 0.5rem solid #ff4c29;
+  border-radius: 50%;
+}
+
+.avatar {
+  font-size: 5rem;
+  color: #ff4c29;
+  border: 0.5rem solid #2c394b;
+  padding: 1rem;
+  border-radius: 20%;
+}
+
 /* Form error messages */
 .messages {
   font-size: 0.9rem;
@@ -289,6 +343,7 @@ input:-webkit-autofill:active {
 
   .header {
     z-index: 9;
+    height: 3rem;
   }
 
   .navbar {
@@ -359,5 +414,19 @@ input:-webkit-autofill:active {
   .form-content input {
     width: 95%;
     margin: 0.5rem 0;
+  }
+
+  .avatar-frame {
+    width: 120px;
+    height: 120px;
+    border-radius: 10%;
+    border-width: 0.3rem;
+  }
+
+  .avatar {
+    font-size: 3rem;
+    padding: 1rem;
+    border-width: 0.3rem;
+    border-radius: 10%;
   }
 }

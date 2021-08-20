@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { FaRegUser } from "react-icons/fa";
 
 function Profile() {
-  const { userId } = useParams();
+  const { id } = useParams();
   const [profileData, setProfileData] = useState([]);
 
   const userProfile = async () => {
-    const obj = await fetch(`http://localhost:5000/profile/${userId}`, {
+    const obj = await fetch(`http://localhost:5000/profile/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -23,18 +24,43 @@ function Profile() {
   };
 
   useEffect(() => {
-    console.log(userId);
     userProfile();
   });
   return (
-    <div>
+    <section className="sub-body">
       <h2 className="headings">Profile</h2>
-      <p>
-        {profileData.map((ele) => {
-          return ele;
-        })}
-      </p>
-    </div>
+
+      <div className="avatar-frame">
+        <FaRegUser className="avatar" />
+      </div>
+
+      <div className="user-profile">
+        <div className="profile-data">
+          <p className="profile-label">Name: </p>
+          <p className="profile-desc">{profileData.name}</p>
+        </div>
+
+        <div className="profile-data">
+          <p className="profile-label">Age: </p>
+          <p className="profile-desc">{profileData.age}</p>
+        </div>
+
+        <div className="profile-data">
+          <p className="profile-label">Phone: </p>
+          <p className="profile-desc">{profileData.phone}</p>
+        </div>
+
+        <div className="profile-data">
+          <p className="profile-label">Email: </p>
+          <p className="profile-desc">{profileData.email}</p>
+        </div>
+
+        <div className="profile-data">
+          <p className="profile-label">Address: </p>
+          <p className="profile-desc">{profileData.address}</p>
+        </div>
+      </div>
+    </section>
   );
 }
 

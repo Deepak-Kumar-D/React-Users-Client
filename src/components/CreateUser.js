@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const schema = yup.object().shape({
   name: yup.string().required(),
+  avatar: yup.string(),
   age: yup.number().required(),
   phone: yup.number().required(),
   email: yup.string().email().required(),
@@ -26,6 +27,7 @@ function CreateUser() {
       },
       body: JSON.stringify({
         name: data.name,
+        avatar: data.avatar,
         age: data.age,
         phone: data.phone,
         email: data.email,
@@ -58,6 +60,11 @@ function CreateUser() {
           />
         </div>
         <p className="messages">{errors.name && "⚠ Name is important!"}</p>
+
+        <div className="form-content">
+          <label htmlFor="avatar">Avatar</label>
+          <input type="file" name="avatar" {...register("avatar")} />
+        </div>
 
         <div className="form-content">
           <label htmlFor="age">Age</label>
