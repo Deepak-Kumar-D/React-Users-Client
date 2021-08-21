@@ -7,12 +7,15 @@ function Profile() {
   const [profileData, setProfileData] = useState([]);
 
   const userProfile = async () => {
-    const obj = await fetch(`http://localhost:5000/profile/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const obj = await fetch(
+      `https://db-react-users.herokuapp.com/profile/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const data = await obj.json();
 

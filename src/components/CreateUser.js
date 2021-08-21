@@ -20,7 +20,7 @@ function CreateUser() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    const obj = await fetch("http://localhost:5000/createuser", {
+    const obj = await fetch("https://db-react-users.herokuapp.com/createuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

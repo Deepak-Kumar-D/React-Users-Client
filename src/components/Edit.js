@@ -1,17 +1,6 @@
-// import * as yup from "yup";
 import { useForm } from "react-hook-form";
-// import { yupResolver } from "@hookform/resolvers/yup";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-
-// const schema = yup.object().shape({
-//   name: yup.string(),
-//   avatar: yup.string(),
-//   age: yup.number(),
-//   phone: yup.number(),
-//   email: yup.string().email(),
-//   address: yup.string(),
-// });
 
 export default function Edit() {
   const { id } = useParams();
@@ -20,19 +9,22 @@ export default function Edit() {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
-    const obj = await fetch(`http://localhost:5000/edit-user/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: data.name ? data.name : profileData.name,
-        age: data.age ? data.age : profileData.age,
-        phone: data.phone ? data.phone : profileData.phone,
-        email: data.email ? data.email : profileData.email,
-        address: data.address ? data.address : profileData.address,
-      }),
-    });
+    const obj = await fetch(
+      `https://db-react-users.herokuapp.com/edit-user/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: data.name ? data.name : profileData.name,
+          age: data.age ? data.age : profileData.age,
+          phone: data.phone ? data.phone : profileData.phone,
+          email: data.email ? data.email : profileData.email,
+          address: data.address ? data.address : profileData.address,
+        }),
+      }
+    );
 
     const user = await obj.json();
 
@@ -45,12 +37,15 @@ export default function Edit() {
 
   useEffect(() => {
     const userProfile = async () => {
-      const obj = await fetch(`http://localhost:5000/profile/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const obj = await fetch(
+        `https://db-react-users.herokuapp.com/profile/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const data = await obj.json();
 

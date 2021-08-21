@@ -9,7 +9,7 @@ function Users() {
 
   // Fetch users on router load/refresh
   const userResult = async () => {
-    const obj = await fetch("http://localhost:5000/getuser", {
+    const obj = await fetch("https://db-react-users.herokuapp.com/getuser", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
