@@ -63,7 +63,9 @@ function Users() {
             </div>
 
             <div className="col m-align s-width">
-              <FaRegEdit className="edit" />
+              <Link to={`/edit-user/${ele._id}`}>
+                <FaRegEdit className="edit" />
+              </Link>
             </div>
           </div>
         );

@@ -5,6 +5,7 @@ import CreateUser from "./components/CreateUser";
 import Users from "./components/Users";
 import Dashboard from "./components/Dashboard";
 import Profile from "./components/Profile";
+import Edit from "./components/Edit";
 import { FaReact } from "react-icons/fa";
 import { CgMenuRight } from "react-icons/cg";
 
@@ -35,7 +36,7 @@ function App() {
           </Route>
 
           <Route path="/edit-user/:id">
-            <h2 className="headings">Edit User</h2>
+            <Edit />
           </Route>
 
           <Route path="/profile/:id">

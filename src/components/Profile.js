@@ -25,7 +25,11 @@ function Profile() {
 
   useEffect(() => {
     userProfile();
-  });
+
+    return () => {
+      setProfileData({});
+    };
+  }, []);
   return (
     <section className="sub-body">
       <h2 className="headings">Profile</h2>

@@ -138,7 +138,7 @@
   font-weight: normal;
 }
 
-.form-content input {
+.form-content input[type="text"] {
   flex: 80%;
   padding: 0.5rem;
   border: none;
@@ -146,6 +146,28 @@
   border-bottom: 1px solid #ff4c29;
   background-color: #f0f0ed;
   outline: none;
+}
+
+.form-content input[type="file"] {
+  flex: 80%;
+  padding: 0.5rem;
+  padding-left: 0;
+  border: none;
+  color: #2c394b;
+}
+
+input[type="file"]::file-selector-button {
+  border: 1px solid #ff4c29;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  margin-right: 1rem;
+  font-family: "Gill Sans MT";
+  transition: 0.25s ease-in-out;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #ff4c29;
+  color: #e2e2e2;
 }
 
 input:-webkit-autofill,
@@ -223,7 +245,6 @@ input:-webkit-autofill:active {
 
 .r-border {
   border-right: 1px solid #ff4c29;
-  height: 100%;
 }
 
 /* Wrapping name */
@@ -252,6 +273,7 @@ input:-webkit-autofill:active {
   font-size: 1.1rem;
   text-decoration: none;
   color: #334756;
+  padding: 0.7rem;
 }
 
 .row-data .profile:hover {
@@ -269,6 +291,12 @@ input:-webkit-autofill:active {
   color: #334756;
 }
 
+.col a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* User profile */
 .user-profile {
   background-color: #e2e2e2;
@@ -279,6 +307,7 @@ input:-webkit-autofill:active {
   flex-direction: column;
   justify-content: space-between;
   min-height: 300px;
+  width: 400px;
 }
 
 .profile-data {
@@ -299,14 +328,15 @@ input:-webkit-autofill:active {
   color: #ff4c29;
   padding: 0.5rem;
   border-radius: 3px;
+  width: 100%;
 }
 
 /* Avatar in profiles */
 .avatar-frame {
   margin-top: 1rem;
   background-color: #e2e2e2;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -316,10 +346,10 @@ input:-webkit-autofill:active {
 }
 
 .avatar {
-  font-size: 5rem;
+  font-size: 4rem;
   color: #ff4c29;
   border: 0.5rem solid #2c394b;
-  padding: 1rem;
+  padding: 0.7rem;
   border-radius: 20%;
 }
 
@@ -402,6 +432,10 @@ input:-webkit-autofill:active {
     line-height: 3;
   }
 
+  .row-data .profile {
+    padding: 0.4rem;
+  }
+
   .row-data a {
     font-size: 100%;
   }
@@ -414,6 +448,10 @@ input:-webkit-autofill:active {
   .form-content input {
     width: 95%;
     margin: 0.5rem 0;
+  }
+
+  .user-profile {
+    width: 80%;
   }
 
   .avatar-frame {
