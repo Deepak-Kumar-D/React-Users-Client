@@ -184,6 +184,10 @@ input:-webkit-autofill:active {
   padding: 0.5rem;
 }
 
+.form-submit .btn-delete {
+  margin-right: 0.5rem;
+}
+
 .form-submit input {
   cursor: pointer;
   width: 7rem;

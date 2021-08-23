@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function Edit() {
   const { id } = useParams();
   const [profileData, setProfileData] = useState([]);
+  const history = useHistory();
 
   const { register, handleSubmit } = useForm();
 
@@ -32,6 +33,27 @@ export default function Edit() {
       alert("Invalid attempt!");
     } else {
       alert(user.message);
+    }
+  };
+
+  const DeleteUser = async () => {
+    const obj = await fetch(
+      `https://db-react-users.herokuapp.com/delete-user/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const user = await obj.json();
+
+    if (obj.status !== 200) {
+      alert("Invalid attempt!");
+    } else {
+      alert(user.message);
+      history.push("/");
     }
   };
 
@@ -117,6 +139,14 @@ export default function Edit() {
         </div>
 
         <div className="form-submit">
+          <input
+            className="btn-delete"
+            type="button"
+            value="DELETE"
+            onClick={() => {
+              DeleteUser();
+            }}
+          />
           <input type="submit" value="SUBMIT" />
         </div>
       </form>
