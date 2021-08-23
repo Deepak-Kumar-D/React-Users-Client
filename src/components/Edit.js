@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import RotateLoader from "react-spinners/RotateLoader";
 
 export default function Edit() {
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const [profileData, setProfileData] = useState([]);
   const history = useHistory();
@@ -10,6 +12,7 @@ export default function Edit() {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const obj = await fetch(
       `https://db-react-users.herokuapp.com/edit-user/${id}`,
       {
@@ -30,13 +33,16 @@ export default function Edit() {
     const user = await obj.json();
 
     if (obj.status !== 200) {
+      setLoading(false);
       alert("Invalid attempt!");
     } else {
+      setLoading(false);
       alert(user.message);
     }
   };
 
   const DeleteUser = async () => {
+    setLoading(true);
     const obj = await fetch(
       `https://db-react-users.herokuapp.com/delete-user/${id}`,
       {
@@ -50,8 +56,10 @@ export default function Edit() {
     const user = await obj.json();
 
     if (obj.status !== 200) {
+      setLoading(false);
       alert("Invalid attempt!");
     } else {
+      setLoading(false);
       alert(user.message);
       history.push("/");
     }
@@ -59,6 +67,7 @@ export default function Edit() {
 
   useEffect(() => {
     const userProfile = async () => {
+      setLoading(true);
       const obj = await fetch(
         `https://db-react-users.herokuapp.com/profile/${id}`,
         {
@@ -72,8 +81,10 @@ export default function Edit() {
       const data = await obj.json();
 
       if (obj.status === 422) {
+        setLoading(false);
         alert(data.error);
       } else {
+        setLoading(false);
         setProfileData(data);
       }
     };
@@ -82,7 +93,7 @@ export default function Edit() {
     return () => {
       setProfileData({});
     };
-  }, []);
+  }, [setLoading]);
   return (
     <section className="sub-body">
       <h2 className="headings">Edit User</h2>
@@ -150,6 +161,10 @@ export default function Edit() {
           <input type="submit" value="SUBMIT" />
         </div>
       </form>
+
+      <div className={loading ? "loader" : ""}>
+        <RotateLoader loading={loading} color={"#ff4c29"} size={10} />
+      </div>
     </section>
   );
 }

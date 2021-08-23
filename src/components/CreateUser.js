@@ -1,6 +1,8 @@
+import { useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import RotateLoader from "react-spinners/RotateLoader";
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -12,6 +14,7 @@ const schema = yup.object().shape({
 });
 
 function CreateUser() {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     reset,
@@ -20,6 +23,7 @@ function CreateUser() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const obj = await fetch("https://db-react-users.herokuapp.com/createuser", {
       method: "POST",
       headers: {
@@ -38,8 +42,10 @@ function CreateUser() {
     const user = await obj.json();
 
     if (obj.status !== 200) {
+      setLoading(false);
       alert(user.error);
     } else {
+      setLoading(false);
       alert(user.message);
       reset();
     }
@@ -113,6 +119,10 @@ function CreateUser() {
           <input type="submit" value="SUBMIT" />
         </div>
       </form>
+
+      <div className={loading ? "loader" : ""}>
+        <RotateLoader loading={loading} color={"#ff4c29"} size={10} />
+      </div>
     </section>
   );
 }

@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
+import RotateLoader from "react-spinners/RotateLoader";
 
 function Profile() {
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const [profileData, setProfileData] = useState([]);
 
   const userProfile = async () => {
+    setLoading(true);
     const obj = await fetch(
       `https://db-react-users.herokuapp.com/profile/${id}`,
       {
@@ -20,8 +23,10 @@ function Profile() {
     const data = await obj.json();
 
     if (obj.status === 422) {
+      setLoading(false);
       alert(data.error);
     } else {
+      setLoading(false);
       setProfileData(data);
     }
   };
@@ -66,6 +71,10 @@ function Profile() {
           <p className="profile-label">Address: </p>
           <p className="profile-desc">{profileData.address}</p>
         </div>
+      </div>
+
+      <div className={loading ? "loader" : ""}>
+        <RotateLoader loading={loading} color={"#ff4c29"} size={10} />
       </div>
     </section>
   );
